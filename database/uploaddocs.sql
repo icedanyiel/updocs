@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 22 Apr 2017 la 14:17
+-- Generation Time: 22 Apr 2017 la 15:36
 -- Versiune server: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -49,6 +49,13 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Salvarea datelor din tabel `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `password`) VALUES
+(1, 'admin', 'danyielwest@gmail.com', 'admin');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -65,6 +72,20 @@ ALTER TABLE `file`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `file`
+--
+ALTER TABLE `file`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- Restrictii pentru tabele sterse
 --
