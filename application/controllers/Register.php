@@ -19,7 +19,7 @@ class Register extends CI_Controller {
         $userData = array();
         if($this->input->post('regisSubmit')){
             $this->form_validation->set_rules('name', 'Name', 'required');
-            $this->form_validation->set_rules('email', 'Email', 'required|valid_email|callback_email_check');
+            $this->form_validation->set_rules('email', 'Email', 'required|valid_email|');
             $this->form_validation->set_rules('password', 'password', 'required');
             $this->form_validation->set_rules('conf_password', 'confirm password', 'required|matches[password]');
         }
@@ -39,7 +39,7 @@ class Register extends CI_Controller {
                     $data['error_msg'] = 'Some problems occured, please try again.';
                 }
             }
-        $this->load->view('register');
+        $this->load->view('register - Copy');
 
 				//$this->register_model->register($datas);
         /*$data['title']="Registration";*/

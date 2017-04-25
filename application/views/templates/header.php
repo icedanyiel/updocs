@@ -97,7 +97,7 @@
         				<li><a href="/updocs">Home</a></li>
         				<li><a href="/updocs/upload">Upload</a></li>
         				<li><a href="/updocs/register">Register</a></li>
-        				<li><a href="/updocs/myaccount">My Account</a></li>
+        				<li><a href="/updocs/Myaccount">My Account</a></li>
         				<li style="float:right"><a class="active" href="login">Log In/Out</a></li>
         			</ul>
         		</div>
