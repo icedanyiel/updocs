@@ -1,3 +1,4 @@
-        	<div>end of page.</div>
+        	</div>
+        	<footer>end of page.</footer>
         </body>
 </html>
