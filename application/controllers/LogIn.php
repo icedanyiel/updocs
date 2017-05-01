@@ -44,7 +44,7 @@ class LogIn extends CI_Controller {
  
    if($result)
    {
-	 echo "intra pe If";
+
      $sess_array = array();
      foreach($result as $row)
      {
