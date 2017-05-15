@@ -19,12 +19,14 @@ class Register extends CI_Controller {
             $this->form_validation->set_rules('name', 'Name', 'required');
             $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
             $this->form_validation->set_rules('password', 'password', 'required');
+	    $this->form_validation->set_rules('password_conf', 'Password Confirmation', 'required|matches[password]');
         }
 
 		$userData = array(
                 'name' => strip_tags($this->input->post('name')),
                 'email' => strip_tags($this->input->post('email')),
-                'password' => md5($this->input->post('password'))
+                'password' => md5($this->input->post('password')),
+		'password_conf' => md5($this->input->post('password_conf'))
                 );
 
 		if($this->form_validation->run() == true){
