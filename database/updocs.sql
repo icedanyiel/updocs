@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 22 Apr 2017 la 15:36
--- Versiune server: 10.1.21-MariaDB
--- PHP Version: 5.6.30
+-- Generation Time: 15 Mai 2017 la 19:20
+-- Versiune server: 10.1.16-MariaDB
+-- PHP Version: 5.6.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `uploaddocs`
+-- Database: `updocs`
 --
 
 -- --------------------------------------------------------
@@ -45,15 +45,19 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `password` varchar(100) NOT NULL
+  `password` varchar(100) NOT NULL,
+  `password_conf` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Salvarea datelor din tabel `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`) VALUES
-(1, 'admin', 'danyielwest@gmail.com', 'admin');
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `password_conf`) VALUES
+(1, 'admin', 'danyielwest@gmail.com', 'admin', ''),
+(3, 'Andrew', 'email@yahoo.com', '8287458823facb8ff918dbfabcd22ccb', '8287458823facb8ff918dbfabcd22ccb'),
+(4, 'Achileus', 'nume@yahoo.com', '59c5490ada323d9da6263a987f7fcee6', '59c5490ada323d9da6263a987f7fcee6'),
+(6, 'Arnold', 'eu@yahoo.com', '8287458823facb8ff918dbfabcd22ccb', '8287458823facb8ff918dbfabcd22ccb');
 
 --
 -- Indexes for dumped tables
@@ -85,7 +89,7 @@ ALTER TABLE `file`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- Restrictii pentru tabele sterse
 --
