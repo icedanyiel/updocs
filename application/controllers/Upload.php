@@ -12,12 +12,42 @@ class Upload extends CI_Controller {
         public function index()
         {
         		$this->load->view('templates/header');
+				
+				if($this->input->post('uplSubmit')){
+					$this->form_validation->set_rules('title', 'Title', 'required');
+				}
+
+
+
+        $data = array();
+        $fileData = array();
+        $tagsData = array();
+
+        if($this->input->post('regisSubmit')){
+
+             $this->form_validation->set_rules('title', 'required');
+
+                $fileData = array(
+                        'title' => strip_tags($this->input->post('title')),
+                        'description' => strip_tags($this->input->post('description')),
+                        'tags' => strip_tags($this->input->post('tags'))
+                        );
+
+                if($this->form_validation->run() == true){
+                        $insert = $this->upload_model->upload($fileData);
+                        $insert = $this->upload_model->upload_tags($tagsData);
+
+                }
+            }
+				
                 $this->load->view('upload', array('error' => ' ' ));
        			$this->load->view('templates/footer');
         }
 
         public function do_upload()
         {
+				
+				
                 $config['upload_path']          = './public/';
                 $config['allowed_types']        = 'pdf|doc|docx';
                 $config['max_size']             = 10000;
