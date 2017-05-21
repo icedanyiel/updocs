@@ -31,8 +31,7 @@ class Register extends CI_Controller {
 		$userData = array(
                 'name' => strip_tags($this->input->post('name')),
                 'email' => strip_tags($this->input->post('email')),
-                'password' => md5($this->input->post('password')),
-				'password_conf' => md5($this->input->post('password_conf'))
+                'password' => md5($this->input->post('password'))				
                 );
 
 		if($this->form_validation->run() == true){
