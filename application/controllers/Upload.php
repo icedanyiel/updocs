@@ -3,11 +3,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Upload extends CI_Controller {
 
-        public function __construct()
-        {
-                parent::__construct();
-                $this->load->helper(array('form', 'url'));
-        }
+        function __construct() {
+        parent::__construct();
+        $this->load->library('form_validation');
+        $this->load->model('upload_model');
+    }
 
         public function index()
         {
@@ -15,21 +15,19 @@ class Upload extends CI_Controller {
 				
 				if($this->input->post('uplSubmit')){
 					$this->form_validation->set_rules('title', 'Title', 'required');
+					$this->form_validation->set_rules('description', 'Descriere de fisier', 'required');
 				}
-
-
 
         $data = array();
         $fileData = array();
         $tagsData = array();
 
-        if($this->input->post('regisSubmit')){
-
-             $this->form_validation->set_rules('title', 'required');
 
                 $fileData = array(
                         'title' => strip_tags($this->input->post('title')),
-                        'description' => strip_tags($this->input->post('description')),
+                        'description' => strip_tags($this->input->post('description'))
+                        );
+				$tagsData = array(
                         'tags' => strip_tags($this->input->post('tags'))
                         );
 
@@ -38,7 +36,7 @@ class Upload extends CI_Controller {
                         $insert = $this->upload_model->upload_tags($tagsData);
 
                 }
-            }
+            
 				
                 $this->load->view('upload', array('error' => ' ' ));
        			$this->load->view('templates/footer');
@@ -64,10 +62,10 @@ class Upload extends CI_Controller {
                 }
                 else
                 {
-                        $data = array('upload_data' => $this->upload->data());
+                        $fileData = array('upload_data' => $this->upload->data());
 
         				$this->load->view('templates/header');
-                        $this->load->view('upload_success', $data);
+                        $this->load->view('upload_success', $fileData);
        					$this->load->view('templates/footer');
                 }
         }
