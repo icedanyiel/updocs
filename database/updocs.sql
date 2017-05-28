@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 28 Mai 2017 la 13:01
--- Versiune server: 10.1.21-MariaDB
--- PHP Version: 5.6.30
+-- Generation Time: 28 Mai 2017 la 13:48
+-- Versiune server: 10.1.16-MariaDB
+-- PHP Version: 5.6.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -28,8 +28,23 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `category` (
   `id` int(11) NOT NULL,
-  `nume` int(11) NOT NULL
+  `nume` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Salvarea datelor din tabel `category`
+--
+
+INSERT INTO `category` (`id`, `nume`) VALUES
+(8, 'Career & Money'),
+(4, 'Entertainment'),
+(1, 'Fiction'),
+(3, 'Health & Fitness'),
+(5, 'History'),
+(7, 'Lifestyle'),
+(9, 'Personal growth'),
+(6, 'Politics'),
+(2, 'Science & Tech');
 
 -- --------------------------------------------------------
 
@@ -77,7 +92,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`) VALUES
-(1, 'admin', 'danyielwest@gmail.com', '21232f297a57a5a743894a0e4a801fc3');
+(1, 'admin', 'danyielwest@gmail.com', '21232f297a57a5a743894a0e4a801fc3'),
+(2, 'Arnold', 'arnold@yahoo.com', '8287458823facb8ff918dbfabcd22ccb');
 
 --
 -- Indexes for dumped tables
@@ -96,7 +112,7 @@ ALTER TABLE `category`
 ALTER TABLE `file`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_iduser` (`iduser`),
-  ADD KEY `fk_idcategory` (`idcategory`);
+  ADD KEY `idcategory` (`idcategory`);
 
 --
 -- Indexes for table `tags`
@@ -116,10 +132,15 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `category`
+--
+ALTER TABLE `category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+--
 -- AUTO_INCREMENT for table `file`
 --
 ALTER TABLE `file`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `tags`
 --
@@ -129,7 +150,7 @@ ALTER TABLE `tags`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Restrictii pentru tabele sterse
 --
