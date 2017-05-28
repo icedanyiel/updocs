@@ -9,7 +9,7 @@
 					    position: relative;
 					} 
 					/*TOP MENU LIST*/
-					ul {
+					ul.header {
 					    list-style-type: none;
 					    margin: 0;
 					    padding: 0;
@@ -17,7 +17,7 @@
 					    background-color: #333;
 					}
 
-					li {
+					li.hdr {
 					    float: left;
 					}
 
@@ -93,12 +93,25 @@
         		<h1><a style="text-decoration: none; color: #B22222;" href=""><?php echo "UpDocs"; ?></a></h1>
 
         		<div id="top-menu">
-        			<ul>
-        				<li><a href="/updocs">Home</a></li>
-        				<li><a href="/updocs/upload">Upload</a></li>
-        				<li><a href="/updocs/register">Register</a></li>
-        				<li><a href="/updocs/myaccount">My Account</a></li>
-        				<li style="float:right"><a class="active" href="login">Log In/Out</a></li>
+        			<ul class="header">
+        				<li class="hdr"><?php echo anchor('home', 'Home'); ?></li>
+        				<li class="hdr"><?php echo anchor('upload', 'Upload'); ?></li>
+        				<li class="hdr"><?php echo anchor('register', 'Register'); ?></li>
+        				<li class="hdr"><?php echo anchor('myaccount', 'My Account'); ?></li>
+
+        				<li style="float:right" class="active">
+
+        				<?php
+        					if($this->session->userdata('logged_in')){
+        						echo anchor('MyAccount/logout', 'Log Out');
+        					}
+        					else{
+        						echo anchor('login', 'Log In');
+        					}
+        				?>
+
+        				</li>
+
         			</ul>
         		</div>
 

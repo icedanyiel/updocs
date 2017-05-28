@@ -9,11 +9,16 @@ class Upload extends CI_Controller {
         $this->load->model('upload_model');
         $this->load->library('session');
     }
-
     public function index()
     {
         $this->load->view('templates/header');
-                $this->load->view('upload', array('error' => ' ' ));
+        $this->load->view('upload', array('error' => ' ' ));
+        $this->load->view('templates/footer');
+    }
+
+
+    public function do_upload()
+    {
 
         $session_data = $this->session->userdata('logged_in');
         $id = $session_data['id'];
@@ -26,12 +31,6 @@ class Upload extends CI_Controller {
             $this->form_validation->set_rules('description', 'description', 'required');
         }
 
-        $fileData = array(
-            'title' => strip_tags($this->input->post('title')),
-            'description' => strip_tags($this->input->post('description')),
-            'iduser' => 1
-            );
-
         if($this->form_validation->run() == true){
 
             $config['upload_path']          = './public/';
@@ -39,18 +38,27 @@ class Upload extends CI_Controller {
             $config['max_size']             = 10000;
 
             $this->load->library('upload', $config);
+
             
-            $error = array('error' => $this->upload->display_errors());
 
             if($this->upload->do_upload('userfile'))
             {
+                $fileData = array(
+                    'title' => strip_tags($this->input->post('title')),
+                    'description' => strip_tags($this->input->post('description')),
+                    'iduser' => 1,
+                    'filename' => $this->upload->data('file_name')
+                );
+                
                 $data = array('upload_data' => $this->upload->data());
                 $insert = $this->upload_model->upload($fileData);
-                redirect('myaccount');
+                $this->load->view('templates/header');
+                $this->load->view('upload_success', $data);
             }
             else{
-                $this->form_validation->set_message('upload_image', $this->upload->display_errors());
-                echo "eroare";
+                $error = array('error' => $this->upload->display_errors());
+                $this->load->view('templates/header');
+                $this->load->view('upload', $error);
             }
 
         }else

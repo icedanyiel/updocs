@@ -13,7 +13,7 @@ public function index()
 	{
      $session_data = $this->session->userdata('logged_in');
      $data['email'] = $session_data['email'];
-	 $data['name'] = $session_data['name'];
+	   $data['name'] = $session_data['name'];
      $this->load->view('templates/header',$data);
      $this->load->view('myaccount',$data);
      $this->load->view('templates/footer',$data);
