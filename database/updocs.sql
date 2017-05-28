@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.6.5.2
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 28 Mai 2017 la 13:48
--- Versiune server: 10.1.16-MariaDB
--- PHP Version: 5.6.24
+-- Generation Time: 28 Mai 2017 la 22:11
+-- Versiune server: 10.1.21-MariaDB
+-- PHP Version: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -28,14 +28,14 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `category` (
   `id` int(11) NOT NULL,
-  `nume` varchar(100) NOT NULL
+  `name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Salvarea datelor din tabel `category`
 --
 
-INSERT INTO `category` (`id`, `nume`) VALUES
+INSERT INTO `category` (`id`, `name`) VALUES
 (8, 'Career & Money'),
 (4, 'Entertainment'),
 (1, 'Fiction'),
@@ -70,7 +70,7 @@ CREATE TABLE `file` (
 
 CREATE TABLE `tags` (
   `id` int(11) NOT NULL,
-  `name` int(11) NOT NULL,
+  `name` varchar(11) NOT NULL,
   `file_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -104,7 +104,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`) VALUES
 --
 ALTER TABLE `category`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `nume` (`nume`);
+  ADD UNIQUE KEY `nume` (`name`);
 
 --
 -- Indexes for table `file`
@@ -140,7 +140,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `file`
 --
 ALTER TABLE `file`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tags`
 --

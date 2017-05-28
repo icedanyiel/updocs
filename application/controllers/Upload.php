@@ -12,7 +12,12 @@ class Upload extends CI_Controller {
     public function index()
     {
         $this->load->view('templates/header');
-        $this->load->view('upload', array('error' => ' ' ));
+
+        $data['category_list'] = $this->upload_model->getCategoryNames();
+
+        $detrimis = array_merge(array('error' => ' ' ), $data);
+        $this->load->view('upload',$detrimis);
+
         $this->load->view('templates/footer');
     }
 
@@ -39,14 +44,13 @@ class Upload extends CI_Controller {
 
             $this->load->library('upload', $config);
 
-            
-
             if($this->upload->do_upload('userfile'))
             {
                 $fileData = array(
                     'title' => strip_tags($this->input->post('title')),
                     'description' => strip_tags($this->input->post('description')),
-                    'iduser' => 1,
+                    'idcategory' => $this->input->post('categoryid'),
+                    'iduser' => $id,
                     'filename' => $this->upload->data('file_name')
                 );
                 

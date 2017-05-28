@@ -14,7 +14,7 @@
   <input type="text" class="form-control" name="description" placeholder="description" required="" value="<?php echo set_value('description'); ?>" >
    <br>
   Category:<br>
-  <input type="text" class="form-control" name="category" placeholder="category" required="" value="<?php echo set_value('category'); ?>" >
+  <?php echo form_dropdown('categoryid', $category_list); ?>
    <br>
   Enter tags (separated by commas):<br>
   <input type="text" class="form-control" name="tags" placeholder="your tags" required="" value="<?php echo !empty($file['tags'])?$file['tags']:''; ?>">
