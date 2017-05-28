@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 16 Mai 2017 la 14:54
+-- Generation Time: 28 Mai 2017 la 13:01
 -- Versiune server: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -23,6 +23,17 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Structura de tabel pentru tabelul `category`
+--
+
+CREATE TABLE `category` (
+  `id` int(11) NOT NULL,
+  `nume` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Structura de tabel pentru tabelul `file`
 --
 
@@ -30,8 +41,9 @@ CREATE TABLE `file` (
   `id` int(11) NOT NULL,
   `title` varchar(100) NOT NULL,
   `description` text NOT NULL,
-  `category` varchar(64) NOT NULL,
   `views` int(11) NOT NULL,
+  `filename` text NOT NULL,
+  `idcategory` int(11) NOT NULL,
   `iduser` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -72,11 +84,19 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`) VALUES
 --
 
 --
+-- Indexes for table `category`
+--
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nume` (`nume`);
+
+--
 -- Indexes for table `file`
 --
 ALTER TABLE `file`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_iduser` (`iduser`);
+  ADD KEY `fk_iduser` (`iduser`),
+  ADD KEY `fk_idcategory` (`idcategory`);
 
 --
 -- Indexes for table `tags`
@@ -99,7 +119,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `file`
 --
 ALTER TABLE `file`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tags`
 --
@@ -118,6 +138,7 @@ ALTER TABLE `users`
 -- Restrictii pentru tabele `file`
 --
 ALTER TABLE `file`
+  ADD CONSTRAINT `fk_idcategory` FOREIGN KEY (`idcategory`) REFERENCES `category` (`id`),
   ADD CONSTRAINT `fk_iduser` FOREIGN KEY (`iduser`) REFERENCES `users` (`id`);
 
 --
