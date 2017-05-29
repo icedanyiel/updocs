@@ -90,7 +90,7 @@
         <header class="main-header">
         	<div class="header">
 
-        		<h1><a style="text-decoration: none; color: #B22222;" href=""><?php echo "UpDocs"; ?></a></h1>
+        		<h1><a style="text-decoration: none; color: #B22222;" href="/updocs"><?php echo "UpDocs"; ?></a></h1>
 
         		<div id="top-menu">
         			<ul class="header">
