@@ -1,16 +1,14 @@
  <?php  
  class upload_model extends CI_Model {
- 	function upload($datafile){
-        $this->db->insert('file',$datafile);
+ 	function upload($table,$data){
+        $query = $this->db->insert($table, $data);
+    return $this->db->insert_id();
     }
-/*    function getCategoryNames(){
-		$return[''] = '';
-		$query  = $this->db->get('category');
-		foreach($query->result_array() as $row){
-		    $return[$row['id']] = $row['name'];
-		}
-		return $return;
-	}*/
+	 //Aici se insearaza tagurile
+	function upload2($table,$data){
+        $query = $this->db->insert_batch($table, $data);
+   
+    }
 
 	function getCategoryNames(){
 		$this->db->from('category');
@@ -24,9 +22,5 @@
 		}
 	    return $return;
 	}
-
-/*    function upload_tags($tagfile){
-    	$this->db->insert('tags',$tagfile);
-    }  */
  }  
  ?>  
