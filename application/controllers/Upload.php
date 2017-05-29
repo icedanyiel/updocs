@@ -30,17 +30,19 @@ class Upload extends CI_Controller {
 
         $data = array();
         $fileData = array();
+		$tagsData=array();
 
         if($this->input->post('fileSubmit')){
             $this->form_validation->set_rules('title', 'title', 'required');
             $this->form_validation->set_rules('description', 'description', 'required');
         }
-
+		
         if($this->form_validation->run() == true){
 
             $config['upload_path']          = './public/';
             $config['allowed_types']        = 'pdf|doc|docx';
             $config['max_size']             = 10000;
+			
 
             $this->load->library('upload', $config);
 
@@ -55,7 +57,22 @@ class Upload extends CI_Controller {
                 );
                 
                 $data = array('upload_data' => $this->upload->data());
-                $insert = $this->upload_model->upload($fileData);
+				
+                //introduce fisierul cu datele de titlu si descriere si nume si returneaza id-ul ultimului fisier introdus
+				$idfile = $this->upload_model->upload('file',$fileData);
+				
+				$tags = strip_tags($this->input->post('tags'));
+				
+				//introduce fiecare tag in tabela tags rand pe rand dupa explode 
+				$tagsArray=explode(',',$tags);
+				for($i=0; $i<count($tagsArray); $i++) {
+					$tagsData[$i] = array(
+						'file_id' => $idfile, 
+						'name'=>$tagsArray[$i]
+						);
+				}
+				$insert = $this->upload_model->upload2('tags',$tagsData);
+	
                 $this->load->view('templates/header');
                 $this->load->view('upload_success', $data);
             }
