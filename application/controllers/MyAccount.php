@@ -44,6 +44,13 @@ public function index()
   }
   }
   
+ public function delete_data(){  
+           $idfile = $this->uri->segment(3);  
+           $this->load->model("myaccount_model");  
+           $this->myaccount_model->delete_data($idfile);
+		   redirect("MyAccount");  		   
+      }  
+   
 
  function logout()
  {
