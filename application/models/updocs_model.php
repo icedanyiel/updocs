@@ -26,5 +26,14 @@ class updocs_model extends CI_Model {
             return null;
         }
     }
+
+    function fetch_data()  
+      {
+           $this->db->select('*');
+           $this->db->from('file');  
+           $this->db->join('category', 'category.id = file.id');
+           $query = $this->db->get();  
+           return $query;  
+      }
         
 }

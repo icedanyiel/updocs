@@ -6,17 +6,14 @@ class Home extends CI_Controller {
 
 	function __construct() {
             parent::__construct();
-            $this->load->model("myaccount_model"); 
+            $this->load->model("updocs_model"); 
         }
 
 	public function index()
 	{
         $this->load->view('templates/header');
 
-        $session_data = $this->session->userdata('logged_in');
-
-        $id = $session_data['id'];
-        $data["fetch_data"] = $this->myaccount_model->fetch_data($id);
+        $data["fetch_data"] = $this->updocs_model->fetch_data();
         
         $this->load->view('home',$data);
 

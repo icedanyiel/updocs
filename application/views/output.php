@@ -11,7 +11,7 @@ echo "Search results:";
                    <table class="table table-bordered">
 	                <thead>
                           <tr>
-                              <th>File name</th>
+                              <th>File title</th>
                               <th>Description</th>
                               <th>Category</th>
  		          </tr>

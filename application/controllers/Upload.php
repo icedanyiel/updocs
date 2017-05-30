@@ -40,7 +40,7 @@ class Upload extends CI_Controller {
         if($this->form_validation->run() == true){
 
             $config['upload_path']          = './public/';
-            $config['allowed_types']        = 'pdf|doc|docx';
+            $config['allowed_types']        = 'pdf|doc|docx|ppt';
             $config['max_size']             = 10000;
 			
 

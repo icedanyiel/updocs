@@ -2,7 +2,7 @@
         <head>
                 <title>UpDocs</title>
                 <style>
-					h1 {
+					h1.maintitle {
 						float: left;
 						padding-left: 20px;
 						font-size: 42px;
@@ -90,14 +90,39 @@
         <header class="main-header">
         	<div class="header">
 
-        		<h1><a style="text-decoration: none; color: #B22222;" href="/updocs"><?php echo "UpDocs"; ?></a></h1>
+        		<h1 class="maintitle"><a style="text-decoration: none; color: #B22222;" href="/updocs"><?php echo "UpDocs"; ?></a></h1>
 
         		<div id="top-menu">
         			<ul class="header">
         				<li class="hdr"><?php echo anchor('home', 'Home'); ?></li>
-        				<li class="hdr"><?php echo anchor('upload', 'Upload'); ?></li>
-        				<li class="hdr"><?php echo anchor('register', 'Register'); ?></li>
-        				<li class="hdr"><?php echo anchor('myaccount', 'My Account'); ?></li>
+        				<li class="hdr">
+
+        				
+        				<?php
+        					if($this->session->userdata('logged_in')){
+        						echo anchor('upload', 'Upload');
+        					}
+        				?>
+
+        				</li>
+        				<li class="hdr">
+
+        				<?php
+        					if(! $this->session->userdata('logged_in')){
+        						echo anchor('register', 'Register');
+        						}
+        				?>
+
+        				</li>
+        				<li class="hdr">
+
+        				<?php
+        					if($this->session->userdata('logged_in')){
+        						echo anchor('myaccount', 'My Account');
+        					}
+        				?>
+
+        				</li>
 
         				<li style="float:right" class="active">
 

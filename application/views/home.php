@@ -61,13 +61,14 @@ th {
 // above script codes... 
 </script>
 
-
+All files available on the website:<br><br>
 
 <div class="table-responsive">  
            <table class="table table-bordered">  
                 <tr>  
-                     <th>ID</th>  
-                     <th>File Name</th>     
+                     <th>File title</th>  
+                     <th>Description</th>     
+                     <th>Category</th>     
                 </tr> 
       
         
@@ -78,8 +79,9 @@ th {
                 {  
            ?>  
                 <tr>  
-                     <td><?php echo $row->id; ?></td>  
-                     <td><?php echo "<a href='"."file:///C:/xampp/htdocs/updocs/public/".$row->filename."'>".$row->filename. "</a>"; ?></td> 
+                     <td><?php echo "<a href='"."file:///C:/xampp/htdocs/updocs/public/".$row->filename."'>".$row->title. "</a>"; ?></td> 
+                     <td><?php echo $row->description; ?></td>  
+                     <td ><?php echo $row->name; ?></td>
                       
                 </tr>  
         <?php       
