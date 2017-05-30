@@ -4,12 +4,27 @@ class updocs_model extends CI_Model {
         {
    			parent::__construct();
         }
-        public function get_autocomplete($search_data)
-        {
-                $this->db->select('name, id');
-                $this->db->like('name', $search_data);
+        function booktable($search){
 
-                return $this->db->get('tags', 10)->result();
+        $query = $this
+                ->db
+                ->select('*')
+                ->from('file')
+                ->like('file.title',$search)
+                ->join('tags', 'file.id = tags.file_id')
+                ->join('category', 'category.id = file.id')
+                ->or_like('tags.name',$search)
+                ->group_by("file.title")
+                ->get();
+     
+        if($query->num_rows()>0)
+        {
+            return $query->result(); 
         }
+        else
+        {
+            return null;
+        }
+    }
+        
 }
-?>

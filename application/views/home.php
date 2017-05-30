@@ -1,105 +1,98 @@
 <h2>Documents</h2>
+<style>
+table, td, th {
+    border: 0px solid black;
+}
 
-<head>
-        <meta charset="utf-8">
-        <title>CodeIgniter jQuery Ajax Live Search</title>
+table {
+    border-collapse: collapse;
+    width: 70%;
+}
 
-        <style type="text/css">
+th {
+    text-align: left;
+}
+</style>
 
-            ::selection{ background-color: #E13300; color: white; }
-            ::moz-selection{ background-color: #E13300; color: white; }
-            ::webkit-selection{ background-color: #E13300; color: white; }
-
-            code {
-                font-family: Consolas, Monaco, Courier New, Courier, monospace;
-                font-size: 12px;
-                background-color: #f9f9f9;
-                border: 1px solid #D0D0D0;
-                color: #002166;
-                display: block;
-                margin: 14px 0 14px 0;
-                padding: 12px 10px 12px 10px;
-            }
-
-
-            /* start (custom style) */
-            input[type=text] {
-                width: 200px;
-                padding: 5px;
-                margin: 5px 0;
-                box-sizing: border-box;
-            }
-
-            #autoSuggestionsList > li {
-                background: none repeat scroll 0 0 #F3F3F3;
-                border-bottom: 1px solid #E3E3E3;
-                list-style: none outside none;
-                padding: 3px 15px 3px 15px;
-                text-align: left;
-            }
-
-            #autoSuggestionsList > li a { color: #800000; }
-
-            .auto_list {
-                border: 1px solid #E3E3E3;
-                border-radius: 5px 5px 5px 5px;
-                position: absolute;
-            }
-            /* end (custom style) */
-        </style>
-    </head>
-
-            <div>
-
-                <!-- start (view code) -->
-                <div class="something">
-                    
-        Search <input name="search_data" id="search_data" type="text" onkeyup="ajaxSearch();">
-                    <div id="suggestions">
-                        <div id="autoSuggestionsList">
-                        </div>
-                    </div>
-                </div>
-                <!-- end (view code) -->
-
-            </div>
-            <br>
-
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-        <!-- start (JS code) -->
-        <script type="text/javascript">
-            function ajaxSearch()
-            {
-                var input_data = $('#search_data').val();
-
-                if (input_data.length === 0)
-                {
-                    $('#suggestions').hide();
-                }
-                else
-                {
-                    var post_data = {
-                        'search_data': input_data,
-                        '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>'
-                    };
-
-                    $.ajax({
-                        type: "POST",
-                        url: "<?php echo base_url(); ?>home/autocomplete/",
-                        data: post_data,
-                        success: function (data) {
-                            // return success
-                            if (data.length > 0) {
-                                $('#suggestions').show();
-                                $('#autoSuggestionsList').addClass('auto_list');
-                                $('#autoSuggestionsList').html(data);
-                            }
-                        }
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+        $(document).ready(function(){
+           $("#search").keyup(function(){
+               var str=  $("#search").val();
+               if(str == "") {
+                       $( "#txtHint" ).html("Search results will be listed here...<br><br>"); 
+               }else {
+                       $.get( "<?php echo base_url();?>home/ajaxsearch?id="+str, function( data ){
+                           $( "#txtHint" ).html( data );  
                     });
+               }
+           });  
+        });  
+</script>
 
-                }
-            }
-        </script>
-        <!-- end (JS code) -->
+<div class="container">
+    
+ <!-- search box container starts  -->
+ 
+    <div class="search">
+        <div class="space"></div>
+  <form action="" method="get">
+    
+      <div class="row">
+       <div class="col-lg-10 col-lg-offset-1">
+        <div class="input-group">
+            
+            <span class="input-group-addon" >Search</span>
+  <input autocomplete="off" id="search"  type="text" class="form-control input-lg" placeholder="search file " >
+   
+        </div>
+       </div>
+      </div>   
+  </form>
+     </div>  
+  <!-- search box container ends  -->
+    
+     <div id="txtHint" style="padding-top:2px;" >
+
+     </div>
+     
+</div>
+<script>
+// above script codes... 
+</script>
+
+
+
+<div class="table-responsive">  
+           <table class="table table-bordered">  
+                <tr>  
+                     <th>ID</th>  
+                     <th>File Name</th>     
+                </tr> 
+      
+        
+  <?php  
+           if($fetch_data->num_rows() > 0)  
+           {  
+                foreach($fetch_data->result() as $row)  
+                {  
+           ?>  
+                <tr>  
+                     <td><?php echo $row->id; ?></td>  
+                     <td><?php echo "<a href='"."file:///C:/xampp/htdocs/updocs/public/".$row->filename."'>".$row->filename. "</a>"; ?></td> 
+                      
+                </tr>  
+        <?php       
+                }  
+           }  
+           else  
+           {  
+           ?>  
+                <tr>  
+                     <td colspan="2">No Data Found</td>  
+                </tr>  
+           <?php  
+           }  
+           ?>
+           </table>
+           </div>

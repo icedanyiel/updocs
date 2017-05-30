@@ -6,35 +6,40 @@ class Home extends CI_Controller {
 
 	function __construct() {
             parent::__construct();
+            $this->load->model("myaccount_model"); 
         }
 
 	public function index()
 	{
         $this->load->view('templates/header');
-		$this->load->view('home');
+
+        $session_data = $this->session->userdata('logged_in');
+
+        $id = $session_data['id'];
+        $data["fetch_data"] = $this->myaccount_model->fetch_data($id);
+        
+        $this->load->view('home',$data);
+
         $this->load->view('templates/footer');
-	}
+    }
 
-	public function autocomplete()
+    function ajaxsearch()
+    {
+       if(is_null($this->input->get('id')))
         {
-            // load model
-            $this->load->model('updocs_model');
-
-            $search_data = $this->input->post('search_data');
-
-            $result = $this->updocs_model->get_autocomplete($search_data);
-
-            if (!empty($result))
-            {
-                foreach ($result as $row):
-                    echo "<li><a href='#'>" . $row->name . "</a></li>";
-                endforeach;
-            }
-            else
-            {
-                echo "<li> <em> Not found ... </em> </li>";
-            }
-
+            $this->load->view('home');
         }
+        else
+        {
+        $this->load->model('updocs_model');
+        
+        $data['booktable']=$this->updocs_model->booktable($this->input->get('id')); 
+        
+        $this->load->view('output',$data);
+        
+        }
+        
+       
+    }
 
 }

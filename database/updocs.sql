@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 28 Mai 2017 la 22:11
+-- Generation Time: 30 Mai 2017 la 20:44
 -- Versiune server: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -62,6 +62,15 @@ CREATE TABLE `file` (
   `iduser` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Salvarea datelor din tabel `file`
+--
+
+INSERT INTO `file` (`id`, `title`, `description`, `views`, `filename`, `idcategory`, `iduser`) VALUES
+(1, 'titlu fisierului', 'aceasta este o descriere', 0, 'BoardingCard_143682634_CLJ_OTP1.pdf', 4, 1),
+(2, 'biletul meu de avion', 'to usa', 0, 'CEACAA006VS50U.PDF', 7, 1),
+(3, 'un nou fisier', 'descrierea', 0, 'Travel_Reservation_June_13_for_PATRICIA_GABRIELA_MR_STU_BUIA.pdf', 7, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -73,6 +82,18 @@ CREATE TABLE `tags` (
   `name` varchar(11) NOT NULL,
   `file_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Salvarea datelor din tabel `tags`
+--
+
+INSERT INTO `tags` (`id`, `name`, `file_id`) VALUES
+(1, 'bilet', 1),
+(2, ' avion', 1),
+(3, 'bilet', 2),
+(4, ' avion', 2),
+(5, ' ticket', 2),
+(6, 'bilet3', 3);
 
 -- --------------------------------------------------------
 
@@ -140,12 +161,12 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `file`
 --
 ALTER TABLE `file`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tags`
 --
 ALTER TABLE `tags`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `users`
 --
@@ -166,7 +187,7 @@ ALTER TABLE `file`
 -- Restrictii pentru tabele `tags`
 --
 ALTER TABLE `tags`
-  ADD CONSTRAINT `fk_idfile` FOREIGN KEY (`file_id`) REFERENCES `file` (`id`);
+  ADD CONSTRAINT `fk_idfile` FOREIGN KEY (`file_id`) REFERENCES `file` (`id`) ON DELETE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
